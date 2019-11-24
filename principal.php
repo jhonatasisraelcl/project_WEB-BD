@@ -55,3 +55,24 @@
     } else {
         echo 'imagem nao encontrada';
     }
+
+    if (!empty($_FILES["pmusica"])) {
+    $musica = $_FILES["pmusica"];
+    // Tamanho máximo do arquivo em bytes
+    $error = array();
+    // Verifica se o arquivo é uma imagem
+    if (count($error) == 0) {
+        // Pega extensão da musica
+        preg_match("/\.(mp3){1}$/i", $musica["tmp_name"], $ext);
+        // Gera um nome único para a musica
+        $nomeMusica = $musica["name"]; // md5(uniqid(time())) . "." . $ext[1];
+        // Caminho de onde ficará a musica
+            $caminhoMusica = "../musicas/" . $nomeMusica;
+        // Faz o upload da imagem para seu respectivo caminho
+            move_uploaded_file($foto["tmp_name"], $caminhoMusica);
+    } else {
+        print_r($error);
+    }
+} else {
+    echo 'musica nao encontrada';
+}
