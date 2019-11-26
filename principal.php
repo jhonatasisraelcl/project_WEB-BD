@@ -8,7 +8,7 @@
     $imagem = "";
     $nome_imagem = "";
     
-    // Se a foto estiver sido selecionada
+    // codigo da foto do album
     if (!empty($_FILES["pfoto"])) {
         $foto = $_FILES["pfoto"];
         // Largura máxima em pixels
@@ -56,11 +56,11 @@
         echo 'imagem nao encontrada';
     }
 
+    // codigo da musica de demosntração
     if (!empty($_FILES["pmusica"])) {
     $musica = $_FILES["pmusica"];
-    // Tamanho máximo do arquivo em bytes
     $error = array();
-    // Verifica se o arquivo é uma imagem
+    // Verifica se o arquivo é uma musica
     if (count($error) == 0) {
         // Pega extensão da musica
         preg_match("/\.(mp3){1}$/i", $musica["tmp_name"], $ext);
@@ -76,3 +76,42 @@
 } else {
     echo 'musica nao encontrada';
 }
+
+//if (isset($_POST)) {
+    //Opa! os dados foram enviados
+
+    if (isset($_POST["cantor"])) {
+        if (!empty($_POST["cantor"])) {
+            $cantor = $_POST["cantor"];
+        }
+    } else {
+        echo "Preencha o nome do cantor!";
+    }
+
+    if (isset($_POST)) {
+        //Opa! os dados foram enviados
+        if (isset($_POST["nomeMusica"])) {
+            if (!empty($_POST["nomeMusica"])) {
+                $nomeMusica = $_POST["nomeMusica"];
+            }
+        } else {
+            echo "Preencha o nome da musica de exemplo!";
+        }
+
+        if (isset($_POST["album"])) {
+            if (!empty($_POST["album"])) {
+                $album = $_POST["album"];
+            }
+        }
+    } else {
+        echo "Preencha o nome do album!";
+    }
+
+
+    if (isset($_POST["duracao"])) {
+        if (!empty($_POST["duracao"])) {
+            $duracao = $_POST["duracao"];
+        } else {
+            echo "A duração do album está vazia";
+        }
+    }
