@@ -50,3 +50,30 @@
                 }
         }
         ?>
+        <form action="alterar.php">
+            <img id="perfil" src ="../IMG/Usuarios/<?php echo $foto; ?>" />
+            <table id="dados" >
+                <tr>
+                    <td><h5>Id:</h5></td>
+                    <td><?php echo $id ?></td>
+                </tr><tr>
+                    <td><h5>nick Name:</h5></td>
+                    <td><?php echo $nick ?></td>
+                </tr><tr>
+                    <td><h5>nome</h5></td>
+                    <td><?php echo $nome ?></td>
+                </tr><tr>
+                    <td><h5>cpf</h5></td>
+                    <td><?php echo $cpf ?></td>
+                </tr><tr>
+                    <td><h5>senha</h5></td>
+                    <td><?php echo $senha ?></td>
+                </tr><tr>
+                    <td><h5>email</h5></td>
+                    <td><?php echo $email ?></td>
+                    <td> <button  type="submit" class="btn btn-default" name="alter" id="alter" value="Alterar dados">Alterar </button></td>
+                </tr>
+            </table>
+        </form> 
+    </body>
+</html>
