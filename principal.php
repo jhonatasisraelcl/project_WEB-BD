@@ -58,28 +58,28 @@
 
     // codigo da musica de demosntração
     if (!empty($_FILES["pmusica"])) {
-    $musica = $_FILES["pmusica"];
-    $error = array();
-    // Verifica se o arquivo é uma musica
-    if (count($error) == 0) {
-        // Pega extensão da musica
-        preg_match("/\.(mp3){1}$/i", $musica["tmp_name"], $ext);
-        // Gera um nome único para a musica
-        $nomeMusica = $musica["name"]; // md5(uniqid(time())) . "." . $ext[1];
-        // Caminho de onde ficará a musica
-            $caminhoMusica = "../musicas/" . $nomeMusica;
-        // Faz o upload da imagem para seu respectivo caminho
-            move_uploaded_file($foto["tmp_name"], $caminhoMusica);
+        $musica = $_FILES["pmusica"];
+        $error = array();
+        // Verifica se o arquivo é uma musica
+        if (count($error) == 0) {
+            // Pega extensão da musica
+            preg_match("/\.(mp3){1}$/i", $musica["tmp_name"], $ext);
+            // Gera um nome único para a musica
+            $nomeMusica = $musica["name"]; // md5(uniqid(time())) . "." . $ext[1];
+            // Caminho de onde ficará a musica
+                $caminhoMusica = "../musicas/" . $nomeMusica;
+            // Faz o upload da imagem para seu respectivo caminho
+                move_uploaded_file($foto["tmp_name"], $caminhoMusica);
+        } else {
+            print_r($error);
+        }
     } else {
-        print_r($error);
+        echo 'musica nao encontrada';
     }
-} else {
-    echo 'musica nao encontrada';
-}
 
-//if (isset($_POST)) {
+    //if (isset($_POST)) {
     //Opa! os dados foram enviados
-
+    //dados do cantor
     if (isset($_POST["cantor"])) {
         if (!empty($_POST["cantor"])) {
             $cantor = $_POST["cantor"];
@@ -87,7 +87,6 @@
     } else {
         echo "Preencha o nome do cantor!";
     }
-
     if (isset($_POST)) {
         //Opa! os dados foram enviados
         if (isset($_POST["nomeMusica"])) {
@@ -107,7 +106,6 @@
         echo "Preencha o nome do album!";
     }
 
-
     if (isset($_POST["duracao"])) {
         if (!empty($_POST["duracao"])) {
             $duracao = $_POST["duracao"];
@@ -115,3 +113,13 @@
             echo "A duração do album está vazia";
         }
     }
+    $sql = " INSERT INTO `loja`.`cd` (`album`,`duracao`,`imagem`,`nomeMusica`,`cantor`)
+         VALUES('$album',$duracao,'$nome_imagem','$musica','$cantor');";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+        header("Location: telaPerfil.php");
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error; 
+    }
+?>
